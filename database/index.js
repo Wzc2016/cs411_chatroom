@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
   host     : '35.225.226.226', //mysql database host name
   user     : 'root', //mysql database user name
   password : '', //mysql database password
-  database : 'reviews' //mysql database name
+  database : 'moviemovie' //mysql database name
 });
 
 connection.connect(function(err) {
@@ -86,9 +86,17 @@ app.put('/reviews', function (req, res) {
 
 //rest api to delete record from mysql database
 app.delete('/reviews', function (req, res) {
-   console.log(req.body);
+   // console.log(req.body);
    connection.query('DELETE FROM `reviews` WHERE `Id`=?', [req.body.Id], function (error, results, fields) {
 	  if (error) throw error;
 	  res.end('Record has been deleted!');
 	});
+});
+
+app.get('/search/movies/:prefix',function (req, res) {
+   // console.log(req.body);
+   connection.query('select * FROM `movies` where title like ?', '%' + req.params.prefix + '%', function (error, results, fields) {
+    if (error) throw error;
+    res.end(JSON.stringify(results));
+  });
 });
