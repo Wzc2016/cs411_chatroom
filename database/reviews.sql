@@ -5,7 +5,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `reviews` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Movie` varchar(255) NOT NULL,
+  `MovieId` int(11) NOT NULL,
   `Content` varchar(255) NOT NULL,
   `Num_likes` int(11) NOT NULL,
   `Num_dislikes` int(11) NOT NULL,

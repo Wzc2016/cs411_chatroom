@@ -51,8 +51,8 @@ app.get('/reviews/group', function (req, res) {
 });
 
 //rest api to get a single review data
-app.get('/reviews/:prefix', function (req, res) {
-   connection.query('select * from reviews where Movie like ?', '%' + req.params.prefix + '%', function (error, results, fields) {
+app.get('/reviews/:id', function (req, res) {
+   connection.query('select * from reviews where MovieId = ?', req.params.id, function (error, results, fields) {
 	  if (error) throw error;
 	  res.end(JSON.stringify(results));
 	});
@@ -109,6 +109,8 @@ app.get('/search/movies/:id',function (req, res) {
   });
 });
 
+
+
 app.post('/users', function (req, res) {
    var params  = req.body;
    // console.log(params);
@@ -130,6 +132,14 @@ app.get('/users', (req, res)=>{
     res.end(JSON.stringify(results));
   })
 })
+
+app.get('/users/:id',function (req, res) {
+   // console.log(req.body);
+   connection.query('select * FROM `users` where id = ?', req.params.id, function (error, results, fields) {
+    if (error) throw error;
+    res.end(JSON.stringify(results));
+  });
+});
 
 app.put('/users', (req, res)=> {
     connection.query('UPDATE `users` SET `friends`=?,`movie_list`=?,`password`=?,`user_name`=? where `uid`=?', [req.body.friends, req.body.movie_list, req.body.password, req.body.user_name, req.body.uid], function (error, results, fields) {
