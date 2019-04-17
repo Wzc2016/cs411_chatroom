@@ -100,3 +100,44 @@ app.get('/search/movies/:prefix',function (req, res) {
     res.end(JSON.stringify(results));
   });
 });
+
+app.get('/search/movies/:id',function (req, res) {
+   // console.log(req.body);
+   connection.query('select * FROM `movies` where id = ?', req.params.id, function (error, results, fields) {
+    if (error) throw error;
+    res.end(JSON.stringify(results));
+  });
+});
+
+app.post('/users', function (req, res) {
+   var params  = req.body;
+   // console.log(params);
+   connection.query('INSERT INTO users SET ?', params, function (error, results, fields) {
+    if (error) throw error;
+    // console.log(results);
+    connection.query('SELECT * from users where uid=?', results.insertId, (error, results, fields) => {
+      if (error) throw error;
+      res.end(JSON.stringify(results));
+     })
+  });
+});
+
+app.get('/users', (req, res)=>{
+  let aa = 0;
+  connection.query('select * from users', (error, results, fields) => {
+    if(error) throw error;
+    a = results.insertId;
+    res.end(JSON.stringify(results));
+  })
+})
+
+app.put('/users', (req, res)=> {
+    connection.query('UPDATE `users` SET `friends`=?,`movie_list`=?,`password`=?,`user_name`=? where `uid`=?', [req.body.friends, req.body.movie_list, req.body.password, req.body.user_name, req.body.uid], function (error, results, fields) {
+    if (error) throw error;
+    // res.end(JSON.stringify(results));
+    connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
+      if (error) throw error;
+      res.end(JSON.stringify(results));
+     })
+  });
+});
