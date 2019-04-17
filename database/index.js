@@ -30,7 +30,6 @@ var server = app.listen(8000,  "localhost", function () {
 
   var host = server.address().address
   var port = server.address().port
-
   console.log("Example app listening at http://%s:%s", host, port)
 
 });
@@ -62,7 +61,7 @@ app.get('/reviews/:id', function (req, res) {
 //rest api to create a new review record into mysql database
 app.post('/reviews', function (req, res) {
    var params  = req.body;
-   console.log(params);
+   // console.log(params);
    connection.query('INSERT INTO reviews SET ?', params, function (error, results, fields) {
 	  if (error) throw error;
 	  res.end(JSON.stringify(results));
@@ -108,8 +107,6 @@ app.get('/search/movies/:id',function (req, res) {
     res.end(JSON.stringify(results));
   });
 });
-
-
 
 app.post('/users', function (req, res) {
    var params  = req.body;

@@ -1,0 +1,32 @@
+import React, { Component } from 'react';
+
+
+import { Button, Form, FormControl, Navbar, Nav } from 'react-bootstrap';
+export default class NavBar extends Component {
+
+  render() {
+    return (
+      <Navbar bg="light" expand="lg">
+        <Navbar fixed="top" />
+        <Navbar.Brand href="/home">Movie, Movie</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="/home">Home</Nav.Link>
+
+          </Nav>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-success">Search</Button>
+          </Form>
+          <Nav className="mr-auto">
+            <Nav.Link href="/profile">User</Nav.Link>
+            <Nav.Link href="/signup">Sign Up/Log In</Nav.Link>
+            <Nav.Link href="/home">Log Out</Nav.Link>
+        </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    )
+
+  }
+}

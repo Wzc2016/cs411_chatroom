@@ -2,6 +2,10 @@ import React, { useContext, useState } from 'react';
 import ChatRoom from '../components/ChatRoom';
 import '../style/index.scss';
 import { Context } from '../context';
+import NavBar from '../NavBar.jsx'
+
+// const importJsx = require('import-jsx')
+// const NavBar = importJsx('../NavBar')
 
 const userState = (username) => {
   const [user, setUsername] = useState(username);
@@ -33,10 +37,16 @@ const App = (props) => {
     <div>
       {state.uid ? (
         // 已登录
-        <ChatRoom uid={state.uid} username={state.username} socket={state.socket} />
+        <div>
+          <NavBar/>
+          <ChatRoom uid={state.uid} username={state.username} socket={state.socket} />
+        </div>
       ) : (
         // 登录界面
+        <div>
+        <NavBar/>
         <div className="login-box">
+          
           <h2>Log in</h2>
           <div className="input">
             <input
@@ -52,8 +62,10 @@ const App = (props) => {
             </button>
           </div>
         </div>
+        </div>
       )}
     </div>
+    
   );
 };
 export default App;

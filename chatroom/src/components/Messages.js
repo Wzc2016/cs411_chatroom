@@ -5,7 +5,7 @@ const Message = (props) => {
   if (props.msgType == 'system') {
     return (
       <div className="one-message system-message">
-        {props.msgUser} {props.action == 'login' ? 'enters the chatroom' : 'exit'} <span className="time">&nbsp;{props.time}</span>
+        {props.msgUser} {props.action == 'login' ? '' : 'exit'} <span className="time">&nbsp;{props.time}</span>
       </div>
     );
   } else {

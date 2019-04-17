@@ -11,13 +11,13 @@ import {
   MDBBtn
 } from "mdbreact";
 import {Navbar} from 'react-bootstrap';
-import NavBar from './navBar.jsx';
+import NavBar from '../NavBar.jsx';
 
 export default class SignUp extends Component {
   render() {
 
   return (
-  <li>
+  <div className="w-100">
     <Navbar bg="light" expand="lg">
       <NavBar />
     </Navbar>
@@ -82,7 +82,7 @@ export default class SignUp extends Component {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-    </li>
+    </div>
   )
 }
 }

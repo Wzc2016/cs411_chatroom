@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import Messages from './Messages';
 import ChatInput from './ChatInput';
 import { Context } from '../context';
-
+import NavBar from '../NavBar.jsx'
 // 生成消息id
 const generateMsgId = () => {
   return new Date().getTime() + '' + Math.floor(Math.random() * 899 + 100);
@@ -73,22 +73,15 @@ const ChatRoom = (props) => {
     return userhtml
   }
   return (
+    <div>
     <div className="chat-room">
-      <div className="welcome">
-        <div className="room-action">
-          <div className="room-name">{"Movie Movie! Chatroom"} | {props.username}</div>
-          <div className="button">
-            <button onClick={() => window.location.reload()}>Log out</button>
-          </div>
-        </div>
-      </div>
       <div className="room-status">
-        Online: {state.onlineCount}, Users: {renderUserList()}
       </div>
       <div>
         <Messages messages={state.messages} myId={props.uid} />
         <ChatInput myId={props.uid} myName={props.username} socket={props.socket} />
       </div>
+    </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Input, Card } from 'semantic-ui-react'
 import axios from 'axios'
+import NavBar from '../NavBar.jsx'
 
 import './Search.scss'
 import '../Movie/Movie.scss'
@@ -58,19 +59,23 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="MovieCss">
-        <h1 >Let's Write a Review!</h1>
-        <Input
-          onChange={this.inputChangeHandler_search}
-          label='Movie'
-          placeholder='The name of movie here!'
-          value={this.state.query}
-        />
-        <br/>
-        <Button onClick={this.clickHandlerSearch}>
-          Search
-        </Button>
-        {this.state.queryList}
+      <div>
+        <NavBar />
+        <div className="MovieCss">  
+
+          <h1 >Let's Search for a Movie!</h1>
+          <Input
+            onChange={this.inputChangeHandler_search}
+            label='Movie'
+            placeholder='The name of movie here!'
+            value={this.state.query}
+          />
+          <br/>
+          <Button onClick={this.clickHandlerSearch}>
+            Search
+          </Button>
+          {this.state.queryList}
+        </div>
       </div>
       )
   }
