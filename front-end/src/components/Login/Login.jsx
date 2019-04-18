@@ -12,12 +12,48 @@ import {
 } from "mdbreact";
 import {Navbar} from 'react-bootstrap';
 import NavBar from '../NavBar.jsx';
-
+import axios from 'axios';
 
 
 export default class LogIn extends Component {
 
-  con
+  constructor() {
+    super();
+
+    this.state={
+      username: '',
+      password: '',
+      userId: '',
+    }
+    this.baseUrl = 'http://localhost:8000/username/';
+    this.clickHandler = this.clickHandler.bind(this);
+    this.usr_onChangeHandler = this.usr_onChangeHandler.bind(this);
+    this.pwd_onChangeHandler = this.pwd_onChangeHandler.bind(this);
+  }
+
+  clickHandler(event) {
+    axios.get(this.baseUrl + this.state.username).then((response) => {
+      if(this.state.password == response.data[0].password) {
+        window.sessionStorage.setItem('userId', response.data[0].uid);
+        this.props.history.push('/search');
+      } else {
+        this.props.history.push('/login');
+      }
+      
+    }); 
+  }
+
+  usr_onChangeHandler(e) {
+    this.setState({
+      username: e.target.value
+    })
+  }
+
+  pwd_onChangeHandler(e) {
+    this.setState({
+      password: e.target.value
+    })
+  }
 
   render() {
 
@@ -43,6 +79,7 @@ export default class LogIn extends Component {
                 Username
               </label>
               <input
+                onChange={this.usr_onChangeHandler}
                 type="text"
                 id="defaultFormTextEx"
                 className="form-control"
@@ -55,13 +92,14 @@ export default class LogIn extends Component {
                 Your password
               </label>
               <input
+                onChange={this.pwd_onChangeHandler}
                 type="password"
                 id="defaultFormPasswordEx"
                 className="form-control"
               />
 
               <div className="text-center mt-4">
-                <MDBBtn color="deep-orange" className="mb-3" type="submit">
+                <MDBBtn color="deep-orange" className="mb-3" type="submit" onClick={this.clickHandler}>
                   Log In
                 </MDBBtn>
               </div>

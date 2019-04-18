@@ -130,7 +130,15 @@ app.get('/users', (req, res)=>{
   })
 })
 
-app.get('/users/:id',function (req, res) {
+app.get('/username/:username',function (req, res) {
+   // console.log(req.body);
+   connection.query('select * FROM `users` where user_name = ?', req.params.username, function (error, results, fields) {
+    if (error) throw error;
+    res.end(JSON.stringify(results));
+  });
+});
+
+app.get('/userId/:id',function (req, res) {
    // console.log(req.body);
    connection.query('select * FROM `users` where id = ?', req.params.id, function (error, results, fields) {
     if (error) throw error;
