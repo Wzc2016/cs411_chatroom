@@ -100,7 +100,7 @@ app.get('/search/movies/:prefix',function (req, res) {
   });
 });
 
-app.get('/search/movies/:id',function (req, res) {
+app.get('/search/movieid/:id',function (req, res) {
    // console.log(req.body);
    connection.query('select * FROM `movies` where id = ?', req.params.id, function (error, results, fields) {
     if (error) throw error;
@@ -138,9 +138,9 @@ app.get('/username/:username',function (req, res) {
   });
 });
 
-app.get('/userId/:id',function (req, res) {
+app.get('/userid/:id',function (req, res) {
    // console.log(req.body);
-   connection.query('select * FROM `users` where id = ?', req.params.id, function (error, results, fields) {
+   connection.query('select * FROM `users` where uid = ?', req.params.id, function (error, results, fields) {
     if (error) throw error;
     res.end(JSON.stringify(results));
   });
