@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
 
-
 export default class Profile extends Component {
   constructor() {
   super();
@@ -16,9 +15,31 @@ export default class Profile extends Component {
     userId: ''
   };
 
-  this.baseUrl = 'http://localhost:8000/users/';
-  this.renderAgain();
+  this.baseUrl = 'http://localhost:8000/userid/';
+  this.renderAgain = this.renderAgain.bind(this);
+  let userId = window.sessionStorage.getItem('userId');
+
+  axios.get(this.baseUrl + userId).then((response) => {
+
+    var axiosList = response.data[0].movie_list.split(',').map((mid) => {
+        axios.get("http://localhost:8000/search/movieid/" + mid).then((res) => {
+        var i = (
+          <div>
+            {res.data[0].title}
+          </div>
+          )
+
+        this.setState({
+          list: [...this.state.list, i]
+        })
+      })
+    })
+
+  })
+
+  
   }
+
   renderAgain() {
     axios.get(this.baseUrl + this.state.userId).then((response) => {
     this.setState({
@@ -32,8 +53,10 @@ export default class Profile extends Component {
     }
   }
 
-
   render() {
+
+
+
     return (
       <div className="w-100">
       <Navbar bg="light" expand="lg">
@@ -53,7 +76,9 @@ export default class Profile extends Component {
       </div>
       <div className="container-fluid">
         <h3 className="text-center">Wish List</h3>
-        {this.state.list.map(item => <div key={item.id}>{item.title}</div>)}
+          <div className="movie-list-css">
+            {this.state.list}
+          <div>
       </div>
     </div>
 
