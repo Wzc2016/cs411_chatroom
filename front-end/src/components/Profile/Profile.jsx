@@ -78,7 +78,7 @@ export default class Profile extends Component {
         <h3 className="text-center">Wish List</h3>
           <div className="movie-list-css">
             {this.state.list}
-          <div>
+          </div>
       </div>
     </div>
 

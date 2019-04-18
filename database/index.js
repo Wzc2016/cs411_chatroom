@@ -147,7 +147,7 @@ app.get('/userid/:id',function (req, res) {
 });
 
 app.put('/users', (req, res)=> {
-    connection.query('UPDATE `users` SET `friends`=?,`movie_list`=?,`password`=?,`user_name`=? where `uid`=?', [req.body.friends, req.body.movie_list, req.body.password, req.body.user_name, req.body.uid], function (error, results, fields) {
+    connection.query('UPDATE `users` SET `movie_list`=CONCAT(`movie_list`, ?) where `uid`=?', [ "," + req.body.movie_id, req.body.uid], function (error, results, fields) {
     if (error) throw error;
     // res.end(JSON.stringify(results));
     connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
