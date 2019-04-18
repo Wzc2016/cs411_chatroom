@@ -16,11 +16,13 @@ export default class NavBar extends Component {
 
           </Nav>
 
+          <div class="text-right">
           <Nav className="mr-auto">
             <Nav.Link href="/profile">User</Nav.Link>
             <Nav.Link href="/signup">Sign Up/Log In</Nav.Link>
             <Nav.Link href="/home">Log Out</Nav.Link>
         </Nav>
+          </div>
         </Navbar.Collapse>
       </Navbar>
     )
