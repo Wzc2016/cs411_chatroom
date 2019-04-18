@@ -15,10 +15,7 @@ export default class NavBar extends Component {
             <Nav.Link href="/home">Home</Nav.Link>
 
           </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+
           <Nav className="mr-auto">
             <Nav.Link href="/profile">User</Nav.Link>
             <Nav.Link href="/signup">Sign Up/Log In</Nav.Link>
