@@ -147,12 +147,27 @@ app.get('/userid/:id',function (req, res) {
 });
 
 app.put('/users', (req, res)=> {
-    connection.query('UPDATE `users` SET `movie_list`=CONCAT(`movie_list`, ?) where `uid`=?', [ "," + req.body.movie_id, req.body.uid], function (error, results, fields) {
-    if (error) throw error;
     // res.end(JSON.stringify(results));
     connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
       if (error) throw error;
-      res.end(JSON.stringify(results));
-     })
-  });
+      let i = results[0];
+      // console.log(i);
+      // console.log(i.movie_list);
+      if(!i.movie_list) {
+        connection.query('UPDATE `users` SET `movie_list`= ? where `uid`=?', [req.body.movie_id, req.body.uid], function (error, results, fields) {
+          if (error) throw error;
+          connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
+            res.end(JSON.stringify(results));
+           }) 
+        })
+      } else {
+        connection.query('UPDATE `users` SET `movie_list`=CONCAT(`movie_list`, ?) where `uid`= ? and `movie_list` not like ?' , [ "," + req.body.movie_id, req.body.uid, '%' + req.body.movie_id + '%'], function (error, results, fields) {
+          if (error) throw error;
+          connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
+            res.end(JSON.stringify(results));
+           }) 
+        }) 
+      }
+      
+     });
 });
