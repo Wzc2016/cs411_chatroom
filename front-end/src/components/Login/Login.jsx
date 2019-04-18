@@ -59,9 +59,9 @@ export default class LogIn extends Component {
 
   return (
     <div className="w-100">
-    <Navbar bg="light" expand="lg">
+    <div className="w-100">
       <NavBar />
-    </Navbar>
+    </div>
     <MDBContainer>
       <MDBRow>
         <MDBCol md="6">
