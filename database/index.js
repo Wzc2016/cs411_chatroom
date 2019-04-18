@@ -42,12 +42,12 @@ app.get('/reviews', function (req, res) {
 	});
 });
 
-app.get('/reviews/group', function (req, res) {
-   connection.query('select Movie, COUNT(*) AS count from reviews group by Movie', function (error, results, fields) {
-    if (error) throw error;
-    res.end(JSON.stringify(results));
-  });
-});
+// app.get('/reviews/group', function (req, res) {
+//    connection.query('select Movie, COUNT(*) AS count from reviews group by Movie', function (error, results, fields) {
+//     if (error) throw error;
+//     res.end(JSON.stringify(results));
+//   });
+// });
 
 //rest api to get a single review data
 app.get('/reviews/:id', function (req, res) {
@@ -68,12 +68,12 @@ app.post('/reviews', function (req, res) {
 	});
 });
 
-app.post('/reviews/union', function (req, res) {
-  connection.query('select * from reviews where Movie = ? union select * from reviews where Movie = ?', [req.body.Movie1, req.body.Movie2], function(error, results, fields) {
-    if(error) throw error;
-    res.end(JSON.stringify(results));
-  });
-});
+// app.post('/reviews/union', function (req, res) {
+//   connection.query('select * from reviews where Movie = ? union select * from reviews where Movie = ?', [req.body.Movie1, req.body.Movie2], function(error, results, fields) {
+//     if(error) throw error;
+//     res.end(JSON.stringify(results));
+//   });
+// });
 
 //rest api to update record into mysql database
 app.put('/reviews', function (req, res) {
@@ -171,3 +171,4 @@ app.put('/users', (req, res)=> {
       
      });
 });
+

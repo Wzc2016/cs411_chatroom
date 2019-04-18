@@ -40,7 +40,7 @@ class Search extends Component {
       this.setState({
         queryList: response.data.map((review, ) => {
           return (
-            <li className="center-me medium-font">
+            <div className="center-me medium-font">
               <br />
               <img key={review.id} onClick={() => {return this.imgClickHandler(review.id)}} src="https://res.cloudinary.com/dxit5qwki/image/upload/v1552335256/1.png"/>
               <br/>
@@ -49,7 +49,7 @@ class Search extends Component {
                 </Card>
               <br/>
               <br/>
-            </li>
+            </div>
             )
         })
       });
@@ -59,10 +59,9 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
+      <div className="h-100">
         <NavBar />
         <div className="MovieCss">  
-
           <h1 >Let's Search for a Movie!</h1>
           <Input
             onChange={this.inputChangeHandler_search}
@@ -71,12 +70,16 @@ class Search extends Component {
             value={this.state.query}
           />
           <br/>
+          <br/>
           {window.sessionStorage.getItem('userId')}
           <Button onClick={this.clickHandlerSearch}>
             Search
           </Button>
-          {this.state.queryList}
+          <div className="here">
+            {this.state.queryList}
+          </div>
         </div>
+        
       </div>
       )
   }

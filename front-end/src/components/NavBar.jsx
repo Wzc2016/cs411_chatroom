@@ -8,12 +8,12 @@ export default class NavBar extends Component {
     return (
       <Navbar bg="light" expand="lg">
         <Navbar fixed="top" />
-        <Navbar.Brand href="/home">Movie, Movie</Navbar.Brand>
+        <Navbar.Brand href="/search">Movie, Movie</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/home">Home</Nav.Link>
-
+            <Nav.Link href="/search">Home</Nav.Link>
+            <a class="btn" href="http://localhost:3300">Chat Room</a>
           </Nav>
 
           <div class="text-right">

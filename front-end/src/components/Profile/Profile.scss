@@ -1,0 +1,22 @@
+.ProfileCss {
+  padding-top: 100px;
+	padding-bottom: 100px;
+  padding-left:170px;
+	display: flex;
+  align-items: right;
+  flex-direction: row;
+
+
+}
+.pictureCss{
+  width:200px; /*width of your image*/
+  height:200px; /*height of your image*/
+  background-image:url('profile.png');
+  background-position: 100% 75%;
+  background-size: contain;
+  background-repeat:no-repeat;
+  margin:0px 100px; /* If you want no margin */
+  padding:0; /*if your want to padding */
+  padding-bottom: 00px;
+
+}

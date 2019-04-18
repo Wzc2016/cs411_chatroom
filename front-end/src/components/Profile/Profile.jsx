@@ -4,6 +4,7 @@ import NavBar from '../NavBar.jsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
+import './Profile.scss'
 
 export default class Profile extends Component {
   constructor() {
@@ -55,30 +56,16 @@ export default class Profile extends Component {
 
   render() {
 
-
-
     return (
       <div className="w-100">
-      <Navbar bg="light" expand="lg">
         <NavBar />
-      </Navbar>
-      <div className="btn-group-vertical">
-        <Link to="/recommend">
-          <button type="button" className="btn btn-secondary">
-              Recommend
-          </button>
-        </Link>
-        <a href="http://localhost:3300">
-          <button type="button" className="btn btn-secondary">
-              Chat Room
-          </button>
-        </a>
-      </div>
-      <div className="container-fluid">
+      <div className="ProfileCss">
+      <div class="pictureCss">&nbsp;</div>
         <h3 className="text-center">Wish List</h3>
-          <div className="movie-list-css">
-            {this.state.list}
-          </div>
+        {this.state.list.map(item => <div key={item.id}>{item.title}</div>)}
+      </div>
+      <div>
+      <h3 className="text-center">Movies you might like</h3>
       </div>
     </div>
 
