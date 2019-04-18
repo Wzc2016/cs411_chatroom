@@ -17,17 +17,13 @@ export default class NavBar extends Component {
             </a>
             <br/>
           </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-          <Nav className="mr-auto">
+          <Nav>
             <br/>
-            <a href="http://localhost:3000/signin">
+            <a className="text-right" href="http://localhost:3000/signin">
               Sign Up/Log In
             </a>
             <br/>
-            <a href="http://localhost:3000/search">
+            <a className="text-right" href="http://localhost:3000/search">
               Log Out
             </a>
         </Nav>
