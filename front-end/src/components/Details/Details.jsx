@@ -6,7 +6,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 import styles from './Details.scss';
-import NavBar from '../NavBar.jsx'
+import NavBar from '../NavBar.jsx';
+import hp from './hp.jpg';
 
 //import history from '../history.js';
 require('./Details.scss');
@@ -76,25 +77,25 @@ class Details extends Component{
         <div class ="row">
             <div class = "column">
               <p>{this.state.movie['original_title']}</p>
-              <img src = "poster/dumbo.jpg"/>
+              <img src = {hp} alt={"logo"}/>
             </div>
             <div class = "column">
 
             <Input placeholder='New Review' fluid value={this.state.value} onChange={this.searchHandler.bind(this)}/>
              <button onClick={ () => this.handleReviewPost()}>
-                 CLICK ME TO ADD AN INPUT
+                 ADD A REVIEW HERE!
              </button>
              <br/>
              <br/>
              <br/>
              <button onClick={ () => this.handleMovieList()}>
-                 CLICK ME TO ADD TO MOVIE LIST
+                 ADD THE MOVIE TO WISHLIST!
              </button>
 
             </div>
         </div>
         <div className="lowerPanel">
-          <p>render list here</p>
+          <p>Reviews</p>
           <MovieGridList reviews={this.state.reviews}/>
         </div>
 
