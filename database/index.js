@@ -108,6 +108,24 @@ app.get('/search/movieid/:id',function (req, res) {
   });
 });
 
+
+app.get('/movies',function (req, res) {
+   // console.log(req.body);
+   connection.query('select * FROM `movies`', function (error, results, fields) {
+    if (error) throw error;
+    res.end(JSON.stringify(results));
+  });
+});
+
+app.get('/movies/:genres',function (req, res) {
+   // console.log(req.body);
+   connection.query('select * FROM `movies` where genres = ?', req.params.genres, function (error, results, fields) {
+    if (error) throw error;
+    res.end(JSON.stringify(results));
+  });
+});
+
+
 app.post('/users', function (req, res) {
    var params  = req.body;
    // console.log(params);
