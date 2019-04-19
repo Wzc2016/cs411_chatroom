@@ -190,3 +190,27 @@ app.put('/users', (req, res)=> {
      });
 });
 
+app.put('/users/genre', (req, res) => {
+  connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
+      if (error) throw error;
+      let i = results[0];
+      // console.log(i);
+      // console.log(i.movie_list);
+      if(!i.genre_list) {
+        connection.query('UPDATE `users` SET `genre_list`= ? where `uid`=?', [req.body.genre_id, req.body.uid], function (error, results, fields) {
+          if (error) throw error;
+          connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
+            res.end(JSON.stringify(results));
+           }) 
+        })
+      } else {
+        connection.query('UPDATE `users` SET `genre_list`=CONCAT(`genre_list`, ?) where `uid`= ? and `genre_list` not like ?' , [ "," + req.body.genre_id, req.body.uid, '%' + req.body.genre_id + '%'], function (error, results, fields) {
+          if (error) throw error;
+          connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
+            res.end(JSON.stringify(results));
+           }) 
+        }) 
+      }
+      
+     });
+});

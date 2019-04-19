@@ -58,13 +58,13 @@ export default class SignUp extends Component {
   render() {
 
   return (
-  <div className="w-100">
+  <div className="w-100 h-100">
     <div className="w-100">
       <NavBar />
     </div>
-    <MDBContainer>
-      <MDBRow>
-        <MDBCol md="6">
+    <MDBContainer className='h-100'>
+      <MDBRow className="h-100 d-flex align-items-center justify-content-center">
+        <MDBCol className="w-100" md="6">
           <MDBCard>
             <MDBCardBody>
               <MDBCardHeader className="form-header warm-flame-gradient rounded">

@@ -71,7 +71,7 @@ class Search extends Component {
           />
           <br/>
           <br/>
-          {window.sessionStorage.getItem('userId')}
+          {/*{window.sessionStorage.getItem('userId')}*/}
           <Button onClick={this.clickHandlerSearch}>
             Search
           </Button>

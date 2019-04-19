@@ -18,14 +18,23 @@ export default class Profile extends Component {
 
   this.baseUrl = 'http://localhost:8000/userid/';
   this.renderAgain = this.renderAgain.bind(this);
-  let userId = window.sessionStorage.getItem('userId');
 
-  axios.get(this.baseUrl + userId).then((response) => {
+  
+  }
+
+  titleClickHandler(value) {
+    this.props.history.push('/details/' + value)
+  }
+
+  componentDidMount() {
+      let userId = window.sessionStorage.getItem('userId');
+
+    axios.get(this.baseUrl + userId).then((response) => {
 
     var axiosList = response.data[0].movie_list.split(',').map((mid) => {
         axios.get("http://localhost:8000/search/movieid/" + mid).then((res) => {
         var i = (
-          <div>
+          <div className="movie-list" onClick={() => this.titleClickHandler(res.data[0].id)}>
             {res.data[0].title}
           </div>
           )
@@ -37,8 +46,6 @@ export default class Profile extends Component {
     })
 
   })
-
-  
   }
 
   renderAgain() {
@@ -61,9 +68,14 @@ export default class Profile extends Component {
         <NavBar />
       <div className="ProfileCss">
       <div class="pictureCss">&nbsp;</div>
-        <h3 className="text-center">Wish List</h3>
-        {this.state.list.map(item => <div key={item.id}>{item.title}</div>)}
+        <div>
+            <h3 className="text-center">Wish List</h3>
+          <div>
+            {this.state.list}
+          </div>
+        </div>
       </div>
+      
       <div>
       <h3 className="text-center">Movies you might like</h3>
       </div>
