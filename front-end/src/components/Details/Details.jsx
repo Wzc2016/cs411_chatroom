@@ -10,7 +10,7 @@ import NavBar from '../NavBar.jsx';
 import hp from './hp.jpg';
 
 //import history from '../history.js';
-require('./Details.scss');
+import './Details.scss';
 class Details extends Component{
   constructor(){
     super();
@@ -112,32 +112,32 @@ export default Details;
 
 function MovieGridList(props) {
     // console.log("movie grid list", props);
-		return(
-			<ul className='popular-list-list'>
-				{
-					(props.reviews).map(function(review){
+	return(
+		<ul className='popular-list-list'>
+		{
+			(props.reviews).map(function(review){
             // console.log(review);
 
-		        var reviewId = review.id;
+		        	var reviewId = review.id;
 		        // var index = getIndex(url);
 
 						// moviePoster = <img className='picture-gallery' src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+ index + ".png"} onClick={()=>history.push("/detail/"+index)}/>;
-						return(
-							<div key={reviewId} className='card'>
-								<Grid>
-									<Grid.Column>
-                    <p className='popular-item-list'>
-                    	{review.Content}
-                    </p>
+				return(
+					<div key={reviewId} className='card'>
+						<Grid>
+						<Grid.Column>
+                    				<p className='popular-item-list'>
+                    					{review.Content}
+                    				</p>
 
-									</Grid.Column>
+						</Grid.Column>
 
-								</Grid>
-							</div>
-					);
-        })
-				}
-			</ul>
-		)
+						</Grid>
+					</div>
+				);
+        		})
+		}
+		</ul>
+	)
 
 }
