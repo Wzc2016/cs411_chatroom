@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { Button, Input, Card } from 'semantic-ui-react'
 import axios from 'axios'
 import NavBar from '../NavBar.jsx'
-
 import './Search.scss'
 import '../Movie/Movie.scss'
 
+
 class Search extends Component {
+
+
 
   constructor() {
     super();
@@ -23,6 +25,9 @@ class Search extends Component {
     this.inputChangeHandler_search = this.inputChangeHandler_search.bind(this);
     this.clickHandlerSearch = this.clickHandlerSearch.bind(this);
     this.imgClickHandler = this.imgClickHandler.bind(this);
+
+
+
   }
 
   inputChangeHandler_search(event) {
@@ -38,11 +43,11 @@ class Search extends Component {
     if(this.state.query || this.state.queryList) {
       axios.get(this.baseUrl + this.state.query).then((response) => {
       this.setState({
-        queryList: response.data.map((review, ) => {
+        queryList: response.data.map((review, idx) => {
           return (
             <div className="center-me medium-font">
               <br />
-              <img key={review.id} onClick={() => {return this.imgClickHandler(review.id)}} src="https://res.cloudinary.com/dxit5qwki/image/upload/v1552335256/1.png"/>
+              <img key={review.id} onClick={() => {return this.imgClickHandler(review.id)}} src={"https://picsum.photos/200/"+ (300 + idx)}/>
               <br/>
                 <Card>
                   Movie: {review.title}

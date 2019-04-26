@@ -42,7 +42,7 @@ const App = (props) => {
           <ChatRoom uid={state.uid} username={state.username} socket={state.socket} />
         </div>
       ) : (
-        // 登录界面
+
         <div>
         <NavBar/>
         <div className="login-box">

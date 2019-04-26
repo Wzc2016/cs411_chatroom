@@ -19,10 +19,20 @@ class Details extends Component{
       reviews:[],
       movie: {},
       user: '',
-      value: ''
+      value: '',
+      reviewList: []
     };
+    this.closeHandler = this.closeHandler.bind(this);
 
   }
+
+  closeHandler(id) {
+    console.log(id)
+        axios.delete('http://localhost:8000/reviews/', {data: {Id: id.toString()}}).then(() => {
+          this.componentDidMount();
+        })
+      };
+
 
   componentDidMount(){
     var mid = this.props.match.params.movieId;
@@ -36,6 +46,33 @@ class Details extends Component{
       .then((response) => {
         // console.log(response.data);
         this.setState({reviews: response.data});
+
+        this.setState({reviewList: (this.state.reviews).map((review) => {
+            // console.log(review);
+
+            var reviewId = review.id;
+            // var index = getIndex(url);
+
+            // moviePoster = <img className='picture-gallery' src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+ index + ".png"} onClick={()=>history.push("/detail/"+index)}/>;
+            return(
+              <div key={reviewId} className='card'>
+                <Grid>
+                <Button onClick={() => this.closeHandler(review.Id) }>
+                  X
+                </Button>
+                  <Grid.Column>
+                    <p className='popular-item-list'>
+                      {review.Content}
+                    </p>
+
+                  </Grid.Column>
+
+                </Grid>
+              </div>
+          );
+        })});
+
+
         //return axios.get("http://localhost:8000/reviews/" + this.props.match.params.movieId)
       }).catch((err) => {
         console.log(err)
@@ -69,7 +106,7 @@ class Details extends Component{
       for(let i = 0; i < array.length; i ++) {
         var genre = array[i];
         var info2 = {genre_id : genre.id.toString(), uid: window.sessionStorage.getItem('userId')};
-        console.log(info2)
+        // console.log(info2)
         axios.put('http://localhost:8000/users/genre', info2);
       }
     })  
@@ -86,7 +123,7 @@ class Details extends Component{
             <div class = "col-sm-4">
 
               <p>{this.state.movie['original_title']}</p>
-              <img src = {hp} alt={"logo"}/>
+              <img src ="https://picsum.photos/202/301" alt={"logo"}/>
               </div>
             <div class = "col-sm-4">
 
@@ -112,7 +149,9 @@ class Details extends Component{
             <p>Reviews</p>
           </div>
 
-          <MovieGridList reviews={this.state.reviews}/>
+
+
+          {this.state.reviewList}
   </div>
 </div>
       </div>
@@ -126,34 +165,27 @@ class Details extends Component{
 }
 export default Details;
 
-function MovieGridList(props) {
-    // console.log("movie grid list", props);
-		return(
-			<ul className='popular-list-list'>
-				{
-					(props.reviews).map(function(review){
-            // console.log(review);
+// export class MovieGridList extends Component {
+//     // console.log("movie grid list", props);
 
-		        var reviewId = review.id;
-		        // var index = getIndex(url);
+//     constructor() {
+//       super();
+      
+//     };
 
-						// moviePoster = <img className='picture-gallery' src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+ index + ".png"} onClick={()=>history.push("/detail/"+index)}/>;
-						return(
-							<div key={reviewId} className='card'>
-								<Grid>
-									<Grid.Column>
-                    <p className='popular-item-list'>
-                    	{review.Content}
-                    </p>
+    
 
-									</Grid.Column>
 
-								</Grid>
-							</div>
-					);
-        })
-				}
-			</ul>
-		)
+//     render() {
+// 		return(
+// 			<ul className='popular-list-list'>
+// 				{
+					
+// 				}
+// 			</ul>
+// 		)
+//   }
 
-}
+// }
+
+

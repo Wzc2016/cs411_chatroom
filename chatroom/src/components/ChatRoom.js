@@ -3,12 +3,12 @@ import Messages from './Messages';
 import ChatInput from './ChatInput';
 import { Context } from '../context';
 import NavBar from '../NavBar.jsx'
-// 生成消息id
+
 const generateMsgId = () => {
   return new Date().getTime() + '' + Math.floor(Math.random() * 899 + 100);
 };
 
-// 时间格式
+
 const generateTime = () => {
   let hour = new Date().getHours();
   let minute = new Date().getMinutes();
@@ -22,7 +22,7 @@ const ChatRoom = (props) => {
   const [init, setInit] = useState(false);
   // 更新系统消息
   const updateSysMsg = (o, action) => {
-    const newMsg = { type: 'system', username: o.user.username, uid: o.user.uid, action: action, msgId: generateMsgId(), time: generateTime() };
+    const newMsg = { type: 'system', username: o.user.username, uid: o.user.uid, action: action, msgId: generateMsgId(), time: generateTime()};
     dispatch({
       type: 'UPDATE_SYSTEM_MESSAGE',
       payload: {

@@ -3,8 +3,15 @@ var express = require('express');
 var app = express();
 var mysql      = require('mysql');
 var bodyParser = require('body-parser');
-
+// var axios = require('axios');
 //start mysql connection
+
+// PythonShell.run('./test.py', options, function (err, results) {
+//   if (err) throw err;
+//   // results is an array consisting of messages collected during execution
+//   console.log('results: %j', results);
+// });
+
 var connection = mysql.createConnection({
   host     : '35.225.226.226', //mysql database host name
   user     : 'root', //mysql database user name
@@ -137,6 +144,7 @@ app.post('/users', function (req, res) {
       res.end(JSON.stringify(results));
      })
   });
+
 });
 
 app.get('/users', (req, res)=>{
@@ -183,10 +191,9 @@ app.put('/users', (req, res)=> {
           if (error) throw error;
           connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
             res.end(JSON.stringify(results));
-           }) 
-        }) 
+           })
+        })
       }
-      
      });
 });
 
@@ -199,18 +206,29 @@ app.put('/users/genre', (req, res) => {
       if(!i.genre_list) {
         connection.query('UPDATE `users` SET `genre_list`= ? where `uid`=?', [req.body.genre_id, req.body.uid], function (error, results, fields) {
           if (error) throw error;
+          
           connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
             res.end(JSON.stringify(results));
-           }) 
+           })
         })
       } else {
         connection.query('UPDATE `users` SET `genre_list`=CONCAT(`genre_list`, ?) where `uid`= ? and `genre_list` not like ?' , [ "," + req.body.genre_id, req.body.uid, '%' + req.body.genre_id + '%'], function (error, results, fields) {
           if (error) throw error;
-          connection.query('SELECT * from users where uid=?', req.body.uid, (error, results, fields) => {
-            res.end(JSON.stringify(results));
-           }) 
+          connection.query('SELECT * from users where uid=?', [req.body.uid], (error, result, fields) => {
+            // res.end(JSON.stringify(result));
+           })
         }) 
       }
-      
-     });
+    });
+
+    connection.query('SELECT genre_list from users where uid=?', req.body.uid, (error, results) => {
+      let genre_list = results.genre_list;
+      var spawn = require('child_process').spawn;
+      var sprocess = spawn('python', ['./knn.py', genre_list]);
+      sprocess.stdout.on('data', function(data) {
+        // console.log(data.toString())
+        res.end(JSON.stringify(data.toString()))
+        connection.query('UPDATE users set recommend_list=? where uid = ?', [data.toString(), req.body.uid]);
+      });
+    })
 });

@@ -16,7 +16,6 @@ export default class ChatInput extends Component {
     this.setState({ message: e.target.value });
   }
 
-  // 点击提交或按回车
   handleClick(e) {
     e.preventDefault();
     this.sendMessage();
